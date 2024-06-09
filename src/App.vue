@@ -7,7 +7,7 @@ const tasks = ref([
   { id: 2, name: 'Read book', status: 'pending' },
   { id: 3, name: 'Study English', status: 'pending' },
   { id: 4, name: 'Work', status: 'pending' },
-  { id: 5, name: 'Have lunch', status: 'pending' },
+  { id: 5, name: 'Have lunch', status: 'pending' }
 ])
 
 const newTask = ref('')
