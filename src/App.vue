@@ -83,9 +83,9 @@ function handleUpdate() {
       <li v-for="task in tasks" :key="task.id" class="py-4">
         <TodoItem
           :task="task"
-          :onDone="handleUpdateStatus"
-          :onDelete="handleDelete"
-          :onEdit="handleEdit"
+          @done="handleUpdateStatus"
+          @delete="handleDelete"
+          @edit="handleEdit"
         />
       </li>
     </ul>

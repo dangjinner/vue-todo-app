@@ -2,18 +2,25 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-  task: String,
-  onDone: Function,
-  onDelete: Function,
-  onEdit: Function,
+  task: { type: String, required: true }
 })
 
-const { task, onDone, onEdit } = props
+const emit = defineEmits(['done', 'edit', 'delete'])
+
+const { task } = props
 
 const isDone = computed(() => (task.status === 'done' ? 'line-through' : ''))
 
-function handleDoneTask() {
-  onDone(task.id)
+function handleDone() {
+  emit('done', task.id)
+}
+
+function handleEdit() {
+  emit('edit', task.id)
+}
+
+function handleDelete() {
+  emit('delete', task.id)
 }
 </script>
 
@@ -26,7 +33,7 @@ function handleDoneTask() {
       class="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded"
     />
     <label
-      @click="handleDoneTask"
+      @click="handleDone"
       :for="task.id"
       class="ml-3 text-gray-900 flex w-full justify-between"
     >
@@ -35,9 +42,9 @@ function handleDoneTask() {
         <span class="text-sm font-light text-gray-500"></span>
       </div>
     </label>
-    <div class="flex justify-between" style="width: 80px;">
-      <div class="text-white cursor-pointer" @click="onEdit(task.id)">✏️</div>
-      <div class="text-white cursor-pointer" @click="onDelete(task.id)">❌</div>
+    <div class="flex justify-between" style="width: 80px">
+      <div class="text-white cursor-pointer" @click="handleEdit">✏️</div>
+      <div class="text-white cursor-pointer" @click="handleDelete">❌</div>
     </div>
   </div>
 </template>
